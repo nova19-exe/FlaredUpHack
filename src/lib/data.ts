@@ -16,6 +16,41 @@ export const assets: Asset[] = [
   { name: "Flare", ticker: "FLR", price: 0.025, change24h: 3.5 },
 ];
 
+export type Holding = {
+    name: string;
+    ticker: string;
+    balance: number;
+    price: number;
+};
+
+export const holdings: Holding[] = [
+    { name: "Bitcoin", ticker: "BTC", balance: 0.5, price: 67123.45 },
+    { name: "Flare", ticker: "FLR", balance: 10000, price: 0.025 },
+    { name: "XRP", ticker: "XRP", balance: 5000, price: 0.52 },
+    { name: "USD Coin", ticker: "USDC", balance: 1000, price: 1.00 },
+];
+
+export type Transaction = {
+  id: string;
+  date: string;
+  type: 'buy' | 'sell' | 'hedge';
+  asset: string;
+  amount: number;
+  value: number;
+  status: "Completed" | "Pending" | "Failed";
+  txHash: string;
+}
+
+export const transactions: Transaction[] = [
+  { id: "1", date: "2024-07-22 10:00", type: "buy", asset: "BTC", amount: 0.1, value: 6712.34, status: "Completed", txHash: "0x..."},
+  { id: "2", date: "2024-07-21 14:30", type: "hedge", asset: "BTC", amount: 0.3, value: 20137.04, status: "Completed", txHash: "0x123...abc" },
+  { id: "3", date: "2024-07-20 18:45", type: "sell", asset: "FLR", amount: 5000, value: 125.00, status: "Completed", txHash: "0x..."},
+  { id: "4", date: "2024-07-19 09:15", type: "hedge", asset: "BTC", amount: 0.5, value: 33500.00, status: "Completed", txHash: "0x456...def" },
+  { id: "5", date: "2024-07-18 22:00", type: "hedge", asset: "BTC", amount: 0.2, value: 13450.50, status: "Completed", txHash: "0x789...ghi" },
+  { id: "6", date: "2024-07-18 12:00", type: "buy", asset: "XRP", amount: 1000, value: 520, status: "Completed", txHash: "0x..."},
+];
+
+
 export type HedgeExecution = {
   id: string;
   date: string;
