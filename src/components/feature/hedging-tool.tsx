@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAccount } from "wagmi";
 import { runHedgeAnalysis } from "@/app/actions";
 import { hedgingToolSchema, type HedgingToolSchema } from "@/lib/schemas";
 import type { AutomatedHedgingToolOutput } from "@/ai/flows/automated-hedging-tool";
@@ -23,6 +24,7 @@ export function HedgingTool() {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<AutomatedHedgingToolOutput | null>(null);
   const { toast } = useToast();
+  const { address: connectedAddress } = useAccount();
 
   const form = useForm<HedgingToolSchema>({
     resolver: zodResolver(hedgingToolSchema),
@@ -33,9 +35,16 @@ export function HedgingTool() {
       hedgePercentage: 30,
       hedgeAssets: ["USDC"],
       autoExecute: false,
-      userSmartAccountAddress: "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B",
+      userSmartAccountAddress: "",
     },
   });
+
+  // Update smart account address when wallet connects
+  useEffect(() => {
+    if (connectedAddress) {
+      form.setValue("userSmartAccountAddress", connectedAddress);
+    }
+  }, [connectedAddress, form]);
 
   async function onSubmit(data: HedgingToolSchema) {
     setIsLoading(true);
@@ -142,7 +151,18 @@ export function HedgingTool() {
               <FormField control={form.control} name="userSmartAccountAddress" render={({ field }) => (
                 <FormItem>
                   <FormLabel>Flare Smart Account Address</FormLabel>
-                  <FormControl><Input placeholder="0x..." {...field} /></FormControl>
+                  <FormControl>
+                    <Input 
+                      placeholder={connectedAddress || "0x..."} 
+                      {...field}
+                      disabled={!!connectedAddress}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    {connectedAddress 
+                      ? "Using your connected wallet address" 
+                      : "Connect your wallet or enter a Smart Account address"}
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )} />
