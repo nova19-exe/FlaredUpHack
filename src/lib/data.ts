@@ -1,4 +1,5 @@
 export type Asset = {
+  id: string;
   name: string;
   ticker: string;
   price: number;
@@ -6,15 +7,16 @@ export type Asset = {
 };
 
 export const assets: Asset[] = [
-  { name: "Bitcoin", ticker: "BTC", price: 67123.45, change24h: 1.5 },
-  { name: "Ethereum", ticker: "ETH", price: 3500.00, change24h: 2.1 },
-  { name: "Solana", ticker: "SOL", price: 150.00, change24h: -1.2 },
-  { name: "Tether", ticker: "USDT", price: 1.00, change24h: 0.01 },
-  { name: "USD Coin", ticker: "USDC", price: 1.00, change24h: -0.02 },
-  { name: "Dai", ticker: "DAI", price: 0.99, change24h: 0.05 },
-  { name: "XRP", ticker: "XRP", price: 0.52, change24h: -2.3 },
-  { name: "Flare", ticker: "FLR", price: 0.025, change24h: 3.5 },
+  { id: "bitcoin", name: "Bitcoin", ticker: "BTC", price: 0, change24h: 0 },
+  { id: "ethereum", name: "Ethereum", ticker: "ETH", price: 0, change24h: 0 },
+  { id: "solana", name: "Solana", ticker: "SOL", price: 0, change24h: 0 },
+  { id: "tether", name: "Tether", ticker: "USDT", price: 0, change24h: 0 },
+  { id: "usd-coin", name: "USD Coin", ticker: "USDC", price: 0, change24h: 0 },
+  { id: "dai", name: "Dai", ticker: "DAI", price: 0, change24h: 0 },
+  { id: "ripple", name: "XRP", ticker: "XRP", price: 0, change24h: 0 },
+  { id: "flare-network", name: "Flare", ticker: "FLR", price: 0, change24h: 0 },
 ];
+
 
 export type Holding = {
     name: string;

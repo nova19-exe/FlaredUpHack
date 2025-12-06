@@ -5,13 +5,11 @@ import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
-const AssetIcon = ({ ticker }: { ticker: string }) => {
-  return (
-    <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center font-bold">
-      {ticker.charAt(0)}
-    </div>
-  );
-};
+const AssetIcon = ({ ticker }: { ticker: string }) => (
+  <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center font-bold">
+    {ticker.charAt(0)}
+  </div>
+);
 
 const AssetCard = ({ asset }: { asset: Asset }) => {
   const isUp = asset.change24h >= 0;
@@ -25,7 +23,7 @@ const AssetCard = ({ asset }: { asset: Asset }) => {
         </div>
         <div className="ml-auto text-right">
           <p className="font-semibold">
-            ${asset.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            ${asset.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: asset.price < 10? 6:2})}
           </p>
           <p className={cn("text-sm", isUp ? "text-positive" : "text-negative")}>
             <span className="inline-flex items-center">
@@ -39,30 +37,40 @@ const AssetCard = ({ asset }: { asset: Asset }) => {
   );
 };
 
-
 export function AssetPrices() {
-    const [currentAssets, setCurrentAssets] = useState(assets);
+  const [currentAssets, setCurrentAssets] = useState<Asset[]>(assets);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentAssets(prevAssets => 
-                prevAssets.map(asset => {
-                    const change = (Math.random() - 0.5) * 0.1; // Small random change
-                    const newPrice = asset.price * (1 + change / 100);
-                    const newChange24h = asset.change24h + (Math.random() - 0.5) * 0.5;
-                    return { ...asset, price: newPrice, change24h: newChange24h };
-                })
-            );
-        }, 2000); // Update every 2 seconds
+  useEffect(() => {
+    async function fetchPrices() {
+      const ids = currentAssets.map(a => a.id).join(",");
+      const url = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,tether,usd-coin,dai,ripple,flare-network&vs_currencies=usd&include_24hr_change=true`;
 
-        return () => clearInterval(interval);
-    }, []);
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        setCurrentAssets(prev =>
+          prev.map(asset => ({
+            ...asset,
+            price: data[asset.id]?.usd ?? asset.price,
+            change24h: data[asset.id]?.usd_24h_change ?? asset.change24h,
+          }))
+        );
+      } catch (err) {
+        console.error("Failed to fetch prices:", err);
+      }
+    }
+
+    fetchPrices(); // initial load
+    const interval = setInterval(fetchPrices, 1000); // refresh every 10s
+    return () => clearInterval(interval);
+  }, [currentAssets]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {currentAssets.map((asset) => (
-          <AssetCard key={asset.ticker} asset={asset} />
-        ))}
+      {currentAssets.map(asset => (
+        <AssetCard key={asset.ticker} asset={asset} />
+      ))}
     </div>
   );
 }
