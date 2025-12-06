@@ -44,10 +44,11 @@ export default function LandingPage() {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <Button asChild size="lg">
-                 <Link href="/trade">Start Trading</Link>
+                <Link href="/trade">Start Trading</Link>
               </Button>
-            </div>
           </div>
+</div>
+
         </section>
 
         <section className="w-full pt-16 mt-16 border-t">
