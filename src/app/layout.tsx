@@ -4,8 +4,8 @@ import { Header } from "@/components/layout/header";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Flare Hedge",
-  description: "An automated hedging tool for BTC exposure.",
+  title: "FlareTrade",
+  description: "Trade Smarter on Flare.",
 };
 
 export default function RootLayout({

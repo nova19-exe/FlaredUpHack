@@ -9,7 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
 const links = [
-  { href: "/", label: "Dashboard", icon: BarChart },
+  { href: "/", label: "Home", icon: BarChart },
   { href: "/hedging", label: "Hedging Tool", icon: Bot },
   { href: "/history", label: "History", icon: History },
   { href: "/settings", label: "Settings", icon: Settings },
@@ -42,7 +42,7 @@ export function Header() {
     <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-6">
       <div className="flex items-center gap-2">
         <Logo />
-        <h1 className="text-xl font-semibold">Flare Hedge</h1>
+        <h1 className="text-xl font-semibold">FlareTrade</h1>
       </div>
       <div className="mx-auto">
         <NavLinks />
@@ -63,7 +63,7 @@ export function Header() {
                 <div className="flex flex-col items-center">
                     <div className="flex items-center gap-2 mt-4">
                         <Logo />
-                        <h1 className="text-xl font-semibold">Flare Hedge</h1>
+                        <h1 className="text-xl font-semibold">FlareTrade</h1>
                     </div>
                     <NavLinks isMobile={true} />
                 </div>

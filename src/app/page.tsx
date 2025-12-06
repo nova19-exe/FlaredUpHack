@@ -1,81 +1,75 @@
-import { AssetPrices } from "@/components/feature/asset-prices";
-import { PerformanceChart } from "@/components/feature/performance-chart";
-import { HedgeHistory } from "@/components/feature/hedge-history";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Activity, DollarSign, ShieldCheck, TrendingUp, TrendingDown, GanttChartSquare } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { CheckCircle, Crosshair, Shield, Zap } from "lucide-react";
+import Link from "next/link";
 
-const kpiData = [
+const features = [
   {
-    title: "Portfolio Value",
-    value: "$155,000.00",
-    change: "+2.5%",
-    isPositive: true,
-    icon: DollarSign,
+    title: "Live Prices (FTSO)",
+    description: "Real-time, decentralized price feeds from the Flare Time Series Oracle.",
+    icon: Zap,
   },
   {
-    title: "24h P/L",
-    value: "-$1,234.56",
-    change: "-0.8%",
-    isPositive: false,
-    icon: TrendingDown,
+    title: "Cross-Chain Trades (FAssets)",
+    description: "Seamlessly trade assets from other blockchains like BTC on Flare.",
+    icon: CheckCircle,
   },
   {
-    title: "Total Trades",
-    value: "152",
-    change: "+12 from last month",
-    isPositive: true,
-    icon: GanttChartSquare,
+    title: "Smart Accounts",
+    description: "Automate your trading strategies with programmable, on-chain accounts.",
+    icon: Crosshair,
   },
   {
-    title: "Hedging Coverage",
-    value: "30%",
-    change: "Auto-hedging active",
-    isPositive: true,
-    icon: ShieldCheck,
+    title: "Data Security",
+    description: "Your data is secured on-chain, giving you full control and transparency.",
+    icon: Shield,
   },
 ];
 
-const KpiCard = ({ kpi }: { kpi: (typeof kpiData)[0] }) => (
-    <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{kpi.title}</CardTitle>
-            <kpi.icon className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-            <div className="text-2xl font-bold">{kpi.value}</div>
-            <p className={cn("text-xs", kpi.isPositive ? "text-positive" : "text-negative")}>
-                {kpi.change}
-            </p>
-        </CardContent>
-    </Card>
-)
-
-export default function DashboardPage() {
+export default function LandingPage() {
   return (
-    <div className="grid gap-6">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {kpiData.map(kpi => <KpiCard key={kpi.title} kpi={kpi} />)}
-      </div>
-      <AssetPrices />
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
-        <div className="lg:col-span-3">
-          <PerformanceChart />
-        </div>
-        <div className="lg:col-span-2">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-base font-medium">
-                Recent Activity
-              </CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <HedgeHistory />
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+    <div className="flex flex-col items-center justify-center text-center py-12 lg:py-24">
+      <main className="flex-1">
+        <section className="w-full">
+          <div className="container px-4 md:px-6">
+            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+              <div className="flex flex-col justify-center space-y-4 text-center lg:text-left">
+                <div className="space-y-2">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                    FlareTrade
+                  </h1>
+                  <p className="max-w-[600px] text-muted-foreground md:text-xl mx-auto lg:mx-0">
+                    Trade Smarter on Flare
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center lg:justify-start">
+                  <Button asChild size="lg">
+                    <Link href="#">Connect Wallet</Link>
+                  </Button>
+                  <Button asChild size="lg" variant="secondary">
+                     <Link href="/hedging">Start Trading</Link>
+                  </Button>
+                </div>
+              </div>
+              <div className="mx-auto flex w-full items-center justify-center">
+                 <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {features.map((feature) => (
+                    <Card key={feature.title}>
+                      <CardHeader className="flex flex-row items-center gap-4 pb-2">
+                        <feature.icon className="h-6 w-6 text-primary" />
+                        <CardTitle className="text-base font-semibold">{feature.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-muted-foreground">{feature.description}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
