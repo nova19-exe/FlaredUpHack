@@ -89,18 +89,14 @@
 
 body {
     background:
-        linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)),
         radial-gradient(circle at top left, hsl(var(--primary) / 0.1), transparent 30%),
         radial-gradient(circle at bottom right, hsl(var(--accent) / 0.1), transparent 30%),
         hsl(var(--background));
-    background-blend-mode: normal, overlay, overlay, normal;
 }
 
 body.dark {
     background:
-        linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
-        radial-gradient(circle at top left, hsl(var(--primary) / 0.1), transparent 30%),
-        radial-gradient(circle at bottom right, hsl(var(--accent) / 0.1), transparent 30%),
+        radial-gradient(circle at top left, hsl(var(--primary) / 0.15), transparent 30%),
+        radial-gradient(circle at bottom right, hsl(var(--accent) / 0.15), transparent 30%),
         hsl(var(--background));
-    background-blend-mode: normal, overlay, overlay, normal;
 }
