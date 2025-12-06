@@ -134,7 +134,7 @@ function ConnectWalletButton() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4">
-          {connectors.map((connector) => (
+          {connectors.filter(c => c.icon).map((connector) => (
              <DialogClose asChild key={connector.id}>
               <Button onClick={() => connect({ connector })} variant="outline" className="w-full justify-start text-base py-6">
                 <img src={connector.icon} alt={connector.name} className="h-6 w-6 mr-4" />

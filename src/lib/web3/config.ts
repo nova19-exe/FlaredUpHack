@@ -1,14 +1,23 @@
+'use client';
 import { http, createConfig } from 'wagmi';
 import { flare } from 'wagmi/chains';
 import { coinbaseWallet, injected, walletConnect } from 'wagmi/connectors';
 
+const projectId = process.env.NEXT_PUBLIC_WC_PROJECT_ID || "";
+
+const connectors = [
+  injected({ target: 'metaMask' }),
+  coinbaseWallet({ appName: 'FlareTrade' }),
+];
+
+if (projectId) {
+  connectors.push(walletConnect({ projectId }));
+}
+
+
 export const config = createConfig({
   chains: [flare],
-  connectors: [
-    injected({ target: 'metaMask' }),
-    coinbaseWallet({ appName: 'FlareTrade' }),
-    walletConnect({ projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID! }),
-  ],
+  connectors,
   ssr: true,
   transports: {
     [flare.id]: http(),
