@@ -12,14 +12,13 @@ export function InterfaceSettings() {
     const [isDarkMode, setIsDarkMode] = useState(true);
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            const root = window.document.documentElement;
-            if (isDarkMode) {
-                root.classList.add("dark");
-            } else {
-                root.classList.remove("dark");
-            }
-        }
+      // Set the default theme to dark on initial load
+      document.documentElement.classList.add("dark");
+    }, [])
+
+    useEffect(() => {
+        const root = window.document.documentElement;
+        root.classList.toggle("dark", isDarkMode);
     }, [isDarkMode]);
 
     const toggleTheme = () => {
