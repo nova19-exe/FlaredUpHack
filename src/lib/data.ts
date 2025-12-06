@@ -13,6 +13,7 @@ export const assets: Asset[] = [
   { name: "USD Coin", ticker: "USDC", price: 1.00, change24h: -0.02 },
   { name: "Dai", ticker: "DAI", price: 0.99, change24h: 0.05 },
   { name: "XRP", ticker: "XRP", price: 0.52, change24h: -2.3 },
+  { name: "Flare", ticker: "FLR", price: 0.025, change24h: 3.5 },
 ];
 
 export type HedgeExecution = {

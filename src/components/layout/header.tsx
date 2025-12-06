@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { BarChart, Bot, History, Settings, Wallet, LogOut, Copy, Check, Home } from "lucide-react";
+import { BarChart, Bot, History, Settings, Wallet, LogOut, Copy, Check, Home, CandlestickChart } from "lucide-react";
 import { Logo } from "@/components/icons/logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,6 +24,7 @@ import { Badge } from "../ui/badge";
 const links = [
   { href: "/", label: "Home", icon: Home },
   { href: "/dashboard", label: "Dashboard", icon: BarChart },
+  { href: "/trade", label: "Trade", icon: CandlestickChart },
   { href: "/hedging", label: "Hedging Tool", icon: Bot },
   { href: "/history", label: "History", icon: History },
   { href: "/settings", label: "Settings", icon: Settings },
