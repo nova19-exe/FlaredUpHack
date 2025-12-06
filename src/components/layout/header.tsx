@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { BarChart, Bot, History, Settings, Wallet, LogOut, Copy, Check, Home, CandlestickChart, User } from "lucide-react";
+import { BarChart, Bot, History, Settings, Wallet, LogOut, Copy, Check, Home, CandlestickChart, User, Bell } from "lucide-react";
 import { Logo } from "@/components/icons/logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,9 +17,15 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { flare } from "viem/chains";
 import { useState } from "react";
 import { Badge } from "../ui/badge";
+import { notifications } from "@/lib/data";
 
 const links = [
   { href: "/", label: "Home", icon: Home },
@@ -152,6 +158,38 @@ function ConnectWalletButton() {
   );
 }
 
+function Notifications() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Bell className="h-5 w-5" />
+          <span className="sr-only">Open notifications</span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80" align="end">
+        <div className="p-4">
+          <h4 className="font-medium text-lg">Notifications</h4>
+          <p className="text-sm text-muted-foreground">You have {notifications.length} new notifications.</p>
+        </div>
+        <div className="space-y-2 p-4 pt-0 border-t">
+          {notifications.map((notification) => (
+            <div key={notification.id} className="flex items-start gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
+                {notification.type === 'success' ? '✅' : notification.type === 'error' ? '❌' : '🔔'}
+              </div>
+              <div>
+                <p className="font-semibold text-sm">{notification.title}</p>
+                <p className="text-xs text-muted-foreground">{notification.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 
 export function Header() {
   return (
@@ -164,6 +202,7 @@ export function Header() {
         <NavLinks />
       </div>
       <div className="ml-auto flex items-center gap-2">
+        <Notifications />
         <ConnectWalletButton />
         <Sheet>
             <SheetTrigger asChild>

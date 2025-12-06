@@ -83,3 +83,16 @@ export const performanceData: ChartData[] = [
     { date: "Jun", value: 140000 },
     { date: "Jul", value: 155000 },
 ];
+
+export type Notification = {
+  id: string;
+  title: string;
+  description: string;
+  type: 'info' | 'success' | 'error';
+};
+
+export const notifications: Notification[] = [
+    { id: "1", title: "Trade Successful", description: "Your trade of 0.5 BTC to USDC has been executed.", type: "success" },
+    { id: "2", title: "Price Alert: BTC", description: "BTC has reached your alert price of $68,000.", type: "info" },
+    { id: "3", title: "Trade Failed", description: "Your trade of 100 FLR to XRP failed due to high slippage.", type: "error" },
+];

@@ -16,6 +16,7 @@ import { assets } from "@/lib/data";
 import { ArrowDown, Settings } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Label } from "../ui/label";
+import { useToast } from "@/hooks/use-toast";
 
 const tradeSchema = z.object({
   fromToken: z.string().min(1, "Please select a token."),
@@ -33,6 +34,7 @@ const tokenAssets = assets.filter(a => !['USDT', 'USDC', 'DAI'].includes(a.ticke
 
 export function TradeForm() {
   const [tradeType, setTradeType] = useState<"buy" | "sell">("buy");
+  const { toast } = useToast();
   const form = useForm<TradeSchema>({
     resolver: zodResolver(tradeSchema),
     defaultValues: {
@@ -45,6 +47,10 @@ export function TradeForm() {
 
   function onSubmit(data: TradeSchema) {
     console.log(data);
+    toast({
+        title: "Trade Confirmed",
+        description: `Swapping ${data.fromAmount} ${data.fromToken} for ${data.toToken}.`,
+    });
     // Here you would call a function to execute the trade on-chain.
   }
   
