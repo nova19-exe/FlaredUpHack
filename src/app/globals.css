@@ -5,17 +5,17 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 240 5.9% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 240 5.9% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 240 5.9% 10%;
     --primary: 34 91% 55%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 93.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 93.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 240 3.8% 46.1%;
     --accent: 48 96% 53%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
@@ -85,6 +85,15 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+body {
+    background:
+        linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)),
+        radial-gradient(circle at top left, hsl(var(--primary) / 0.1), transparent 30%),
+        radial-gradient(circle at bottom right, hsl(var(--accent) / 0.1), transparent 30%),
+        hsl(var(--background));
+    background-blend-mode: normal, overlay, overlay, normal;
 }
 
 body.dark {

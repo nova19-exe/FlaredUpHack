@@ -1,11 +1,31 @@
+"use client"
+
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { HedgeHistory } from "../hedge-history";
 import { SlidersHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export function InterfaceSettings() {
+    const [isDarkMode, setIsDarkMode] = useState(true);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const root = window.document.documentElement;
+            if (isDarkMode) {
+                root.classList.add("dark");
+            } else {
+                root.classList.remove("dark");
+            }
+        }
+    }, [isDarkMode]);
+
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
     return (
         <AccordionItem value="interface-notifications">
             <AccordionTrigger className="text-lg font-semibold">
@@ -28,7 +48,7 @@ export function InterfaceSettings() {
                                 Toggle between Dark Mode (default) and Light Mode.
                             </p>
                             <div className="flex items-center space-x-2">
-                                <Switch id="theme-mode" defaultChecked />
+                                <Switch id="theme-mode" checked={isDarkMode} onCheckedChange={toggleTheme} />
                                 <Label htmlFor="theme-mode">Dark Mode</Label>
                             </div>
                         </div>
