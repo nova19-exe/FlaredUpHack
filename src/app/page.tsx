@@ -28,45 +28,42 @@ const features = [
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col items-center justify-center text-center py-12 lg:py-24">
-      <main className="flex-1">
+    <div className="flex flex-col items-center text-center py-12 lg:py-24">
+      <main className="flex-1 container px-4 md:px-6">
         <section className="w-full">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-              <div className="flex flex-col justify-center space-y-4 text-center lg:text-left">
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    FlareTrade
-                  </h1>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl mx-auto lg:mx-0">
-                    Trade Smarter on Flare
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center lg:justify-start">
-                  <Button asChild size="lg">
-                    <Link href="#">Connect Wallet</Link>
-                  </Button>
-                  <Button asChild size="lg" variant="secondary">
-                     <Link href="/hedging">Start Trading</Link>
-                  </Button>
-                </div>
-              </div>
-              <div className="mx-auto flex w-full items-center justify-center">
-                 <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {features.map((feature) => (
-                    <Card key={feature.title}>
-                      <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                        <feature.icon className="h-6 w-6 text-primary" />
-                        <CardTitle className="text-base font-semibold">{feature.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground">{feature.description}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                FlareTrade
+              </h1>
+              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                Trade Smarter on Flare
+              </p>
             </div>
+            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <Button asChild size="lg">
+                <Link href="#">Connect Wallet</Link>
+              </Button>
+              <Button asChild size="lg" variant="secondary">
+                 <Link href="/hedging">Start Trading</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <section className="w-full pt-12 mt-12 border-t">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature) => (
+              <Card key={feature.title} className="text-left">
+                <CardHeader className="flex flex-row items-center gap-4 pb-2">
+                  <feature.icon className="h-6 w-6 text-primary" />
+                  <CardTitle className="text-base font-semibold">{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
       </main>
