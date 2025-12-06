@@ -35,7 +35,7 @@ function NavLinks({ isMobile = false }: { isMobile?: boolean }) {
     const pathname = usePathname();
     const Comp = isMobile ? 'div' : 'nav';
     return (
-        <Comp className={cn("items-center gap-6 text-sm font-medium", isMobile ? "flex flex-col gap-4 mt-6" : "hidden md:flex")}>
+        <Comp className={cn("items-center text-sm font-medium", isMobile ? "flex flex-col gap-4 mt-6" : "hidden md:flex md:gap-8")}>
             {links.map((link) => (
                 <Link
                     key={link.href}
@@ -155,12 +155,12 @@ function ConnectWalletButton() {
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-6">
-      <div className="flex items-center gap-2">
+    <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center border-b bg-background/80 px-4 backdrop-blur-sm md:px-6">
+      <div className="flex items-center gap-2 mr-auto">
         <Logo />
         <h1 className="text-xl font-semibold">FlareTrade</h1>
       </div>
-      <div className="mx-auto">
+      <div className="absolute left-1/2 -translate-x-1/2">
         <NavLinks />
       </div>
       <div className="ml-auto flex items-center gap-2">
