@@ -2,65 +2,53 @@
 import React, { useEffect, useRef, memo } from "react";
 
 function TradingViewWidget() {
-  const container = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (!container.current) return;
+  const loadWidget = () => {
+    if (!containerRef.current) return;
+
+    // Reset container so widget reloads properly
+    containerRef.current.innerHTML = "";
 
     const script = document.createElement("script");
     script.src =
       "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-    script.type = "text/javascript";
     script.async = true;
     script.innerHTML = JSON.stringify({
+      autosize: true,
       allow_symbol_change: true,
-      calendar: false,
-      details: false,
-      hide_side_toolbar: true,
-      hide_top_toolbar: false,
-      hide_legend: false,
-      hide_volume: false,
-      hotlist: false,
       interval: "15",
-      locale: "en",
-      save_image: true,
-      style: "1",
       symbol: "BITSTAMP:BTCUSD",
       theme: "dark",
       timezone: "Etc/UTC",
-      backgroundColor: "#0F0F0F",
-      gridColor: "rgba(242, 242, 242, 0.06)",
-      watchlist: [],
-      withdateranges: false,
-      compareSymbols: [],
-      studies: [],
-      autosize: true,
     });
 
-    container.current.appendChild(script);
+    containerRef.current.appendChild(script);
+
+    // force chart resize
+    setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 300);
+  };
+
+  useEffect(() => {
+    loadWidget();
+
+    const observer = new ResizeObserver(() => {
+      loadWidget();
+    });
+
+    if (containerRef.current) observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div
+      ref={containerRef}
+      style={{ width: "100%", height: "100%" }}
       className="tradingview-widget-container"
-      ref={container}
-      style={{ height: "100%", width: "100%" }}
-    >
-      <div
-        className="tradingview-widget-container__widget"
-        style={{ height: "calc(100% - 32px)", width: "100%" }}
-      ></div>
-      <div className="tradingview-widget-copyright">
-        <a
-          href="https://www.tradingview.com/symbols/BTCUSD/?exchange=BITSTAMP"
-          rel="noopener nofollow"
-          target="_blank"
-        >
-          <span className="blue-text">Bitcoin price</span>
-        </a>
-        <span className="trademark"> by TradingView</span>
-      </div>
-    </div>
+    />
   );
 }
 
