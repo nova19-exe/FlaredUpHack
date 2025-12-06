@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { BarChart, Bot, History, Settings, Wallet, LogOut, Copy, Check, ExternalLink } from "lucide-react";
+import { BarChart, Bot, History, Settings, Wallet, LogOut, Copy, Check, Home } from "lucide-react";
 import { Logo } from "@/components/icons/logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,11 +19,11 @@ import {
 } from "@/components/ui/dialog";
 import { flare } from "viem/chains";
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "../ui/badge";
 
 const links = [
-  { href: "/", label: "Home", icon: BarChart },
+  { href: "/", label: "Home", icon: Home },
+  { href: "/dashboard", label: "Dashboard", icon: BarChart },
   { href: "/hedging", label: "Hedging Tool", icon: Bot },
   { href: "/history", label: "History", icon: History },
   { href: "/settings", label: "Settings", icon: Settings },
@@ -118,6 +118,8 @@ function ConnectWalletButton() {
     );
   }
 
+  const walletConnectors = connectors.filter(c => c.icon);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -134,7 +136,7 @@ function ConnectWalletButton() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4">
-          {connectors.filter(c => c.icon).map((connector) => (
+          {walletConnectors.map((connector) => (
              <DialogClose asChild key={connector.id}>
               <Button onClick={() => connect({ connector })} variant="outline" className="w-full justify-start text-base py-6">
                 <img src={connector.icon} alt={connector.name} className="h-6 w-6 mr-4" />

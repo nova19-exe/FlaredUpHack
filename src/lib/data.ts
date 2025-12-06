@@ -7,6 +7,8 @@ export type Asset = {
 
 export const assets: Asset[] = [
   { name: "Bitcoin", ticker: "BTC", price: 67123.45, change24h: 1.5 },
+  { name: "Ethereum", ticker: "ETH", price: 3500.00, change24h: 2.1 },
+  { name: "Solana", ticker: "SOL", price: 150.00, change24h: -1.2 },
   { name: "Tether", ticker: "USDT", price: 1.00, change24h: 0.01 },
   { name: "USD Coin", ticker: "USDC", price: 1.00, change24h: -0.02 },
   { name: "Dai", ticker: "DAI", price: 0.99, change24h: 0.05 },

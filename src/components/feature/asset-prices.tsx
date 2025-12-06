@@ -59,17 +59,10 @@ export function AssetPrices() {
     }, []);
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      {currentAssets.slice(0, 1).map((asset) => (
-        <div key={asset.ticker} className="w-full md:w-2/5">
-            <AssetCard asset={asset} />
-        </div>
-      ))}
-      <div className="w-full md:w-3/5 grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {currentAssets.slice(1).map((asset) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {currentAssets.map((asset) => (
           <AssetCard key={asset.ticker} asset={asset} />
         ))}
-      </div>
     </div>
   );
 }
