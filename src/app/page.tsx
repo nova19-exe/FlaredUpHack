@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Crosshair, Shield, Zap } from "lucide-react";
 import Link from "next/link";
+import { Header } from "@/components/layout/header";
 
 const features = [
   {
@@ -41,9 +42,7 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Button asChild size="lg">
-                <Link href="#">Connect Wallet</Link>
-              </Button>
+              {/* The wallet connection logic is in the header now */}
               <Button asChild size="lg" variant="secondary">
                  <Link href="/hedging">Start Trading</Link>
               </Button>

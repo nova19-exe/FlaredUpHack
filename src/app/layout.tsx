@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Toaster } from "@/components/ui/toaster";
+import { Web3Provider } from "@/components/providers/web3-provider";
 
 export const metadata: Metadata = {
   title: "FlareTrade",
@@ -24,11 +25,13 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
-        </div>
-        <Toaster />
+        <Web3Provider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
+          </div>
+          <Toaster />
+        </Web3Provider>
       </body>
     </html>
   );
