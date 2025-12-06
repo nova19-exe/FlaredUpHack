@@ -12,7 +12,7 @@ export function CandlestickChart() {
           Live price data from TradingView.
         </CardDescription>
       </CardHeader>
-      <CardContent className="h-96 w-full">
+      <CardContent className="h-[600px] w-full">
         <TradingViewWidget />
       </CardContent>
     </Card>
