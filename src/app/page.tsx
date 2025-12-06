@@ -34,7 +34,7 @@ export default function LandingPage() {
         <section className="w-full">
           <div className="flex flex-col items-center justify-center space-y-4">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+              <h1 className="text-4xl font-headline tracking-tighter sm:text-6xl xl:text-7xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
                 FlareTrade
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
@@ -43,8 +43,8 @@ export default function LandingPage() {
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               {/* The wallet connection logic is in the header now */}
-              <Button asChild size="lg" variant="secondary">
-                 <Link href="/hedging">Start Trading</Link>
+              <Button asChild size="lg">
+                 <Link href="/trade">Start Trading</Link>
               </Button>
             </div>
           </div>
@@ -53,9 +53,9 @@ export default function LandingPage() {
         <section className="w-full pt-12 mt-12 border-t">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature) => (
-              <Card key={feature.title} className="text-left">
+              <Card key={feature.title} className="text-left bg-card/50 backdrop-blur-sm border-white/10">
                 <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                  <feature.icon className="h-6 w-6 text-primary" />
+                  <feature.icon className="h-6 w-6 text-accent" />
                   <CardTitle className="text-base font-semibold">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>

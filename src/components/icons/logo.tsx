@@ -9,10 +9,11 @@ export function Logo() {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="h-6 w-6 text-primary"
-      aria-label="Flare Hedge Logo"
+      aria-label="FlareTrade Logo"
     >
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      <path d="m4.5 10.5 3 3 3-3 3 3 3-3" />
+      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+      <path d="M2 17l10 5 10-5" />
+      <path d="M2 12l10 5 10-5" />
     </svg>
   );
 }

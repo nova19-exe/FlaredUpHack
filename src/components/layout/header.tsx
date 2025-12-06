@@ -47,8 +47,8 @@ function NavLinks({ isMobile = false }: { isMobile?: boolean }) {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                        "transition-colors hover:text-foreground",
-                        pathname === link.href ? "text-foreground" : "text-muted-foreground",
+                        "transition-colors hover:text-primary",
+                        pathname === link.href ? "text-primary font-semibold" : "text-muted-foreground",
                         isMobile && "text-lg"
                     )}
                 >
@@ -193,10 +193,10 @@ function Notifications() {
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center border-b bg-background/80 px-4 backdrop-blur-sm md:px-6">
+    <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center border-b border-white/10 bg-background/80 px-4 backdrop-blur-sm md:px-6">
       <div className="flex items-center gap-2 mr-auto">
         <Logo />
-        <h1 className="text-xl font-semibold">FlareTrade</h1>
+        <h1 className="text-xl font-headline font-bold">FlareTrade</h1>
       </div>
       <div className="absolute left-1/2 -translate-x-1/2">
         <NavLinks />
