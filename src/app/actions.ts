@@ -1,5 +1,4 @@
 "use server";
-import { automatedHedgingTool, AutomatedHedgingToolOutput } from "@/ai/flows/automated-hedging-tool";
 import { hedgingToolSchema, type HedgingToolSchema } from "@/lib/schemas";
 
 export async function runHedgeAnalysis(

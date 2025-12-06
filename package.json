@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@coinbase/wallet-sdk": "^4.3.7",
     "@flarenetwork/flarejs": "^4.1.1",
     "@genkit-ai/google-genai": "^1.20.0",
     "@genkit-ai/next": "^1.20.0",
@@ -38,7 +39,9 @@
     "@radix-ui/react-tabs": "^1.1.3",
     "@radix-ui/react-toast": "^1.2.6",
     "@radix-ui/react-tooltip": "^1.1.8",
+    "@tanstack/react-query": "^5.90.12",
     "@walletconnect/client": "^1.8.0",
+    "@walletconnect/ethereum-provider": "^2.21.10",
     "axios": "^1.13.2",
     "bullmq": "^5.65.1",
     "class-variance-authority": "^0.7.1",
@@ -69,6 +72,7 @@
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "uniswap-sdk": "^3.0.2",
+    "wagmi": "^3.1.0",
     "web3": "^4.16.0",
     "winston": "^3.18.3",
     "zod": "^3.25.76"
