@@ -1,29 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Crosshair, Shield, Zap } from "lucide-react";
+import { Zap, Shield, Repeat, UserCheck } from "lucide-react";
 import Link from "next/link";
-import { Header } from "@/components/layout/header";
 
 const features = [
   {
-    title: "Live Prices (FTSO)",
-    description: "Real-time, decentralized price feeds from the Flare Time Series Oracle.",
+    title: "Real-Time, Trustworthy Data",
+    description: "Get ultra-reliable, live prices from Flare's FTSO. No more worrying about manipulated data from a single source.",
     icon: Zap,
   },
   {
-    title: "Cross-Chain Trades (FAssets)",
-    description: "Seamlessly trade assets from other blockchains like BTC on Flare.",
-    icon: CheckCircle,
-  },
-  {
-    title: "Smart Accounts",
-    description: "Automate your trading strategies with programmable, on-chain accounts.",
-    icon: Crosshair,
-  },
-  {
-    title: "Data Security",
-    description: "Your data is secured on-chain, giving you full control and transparency.",
+    title: "Automated Trading Strategies",
+    description: "Set simple 'if this, then that' rules. For example, if BTC drops 2.5%, automatically swap a portion to a stablecoin to protect your funds.",
     icon: Shield,
+  },
+  {
+    title: "Trade Across Blockchains",
+    description: "Easily swap assets like XRP directly on the Flare network, giving you more options for fast and reliable hedging.",
+    icon: Repeat,
+  },
+  {
+    title: "Simple & Secure Experience",
+    description: "Manage complex strategies with ease. Flare's Smart Accounts make advanced trading accessible and secure for everyone.",
+    icon: UserCheck,
   },
 ];
 
@@ -35,14 +34,15 @@ export default function LandingPage() {
           <div className="flex flex-col items-center justify-center space-y-4">
             <div className="space-y-2">
               <h1 className="text-4xl font-headline tracking-tighter sm:text-6xl xl:text-7xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                FlareTrade
+                Automate Your Edge.
+                <br />
+                Decentralize Your Risk.
               </h1>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                Trade Smarter on Flare
+              <p className="max-w-[700px] text-muted-foreground md:text-xl">
+                Trade smarter with automated strategies and reliable, decentralized data from the Flare network. Stop worrying about centralized exchanges and slow trades—let FlareTrade react to the market for you.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              {/* The wallet connection logic is in the header now */}
               <Button asChild size="lg">
                  <Link href="/trade">Start Trading</Link>
               </Button>
@@ -50,7 +50,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="w-full pt-12 mt-12 border-t">
+        <section className="w-full pt-16 mt-16 border-t">
+            <h2 className="text-3xl font-headline tracking-tighter sm:text-4xl mb-12">The Flare Advantage</h2>
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature) => (
               <Card key={feature.title} className="text-left bg-card/50 backdrop-blur-sm border-white/10">
