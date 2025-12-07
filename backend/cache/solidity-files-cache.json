@@ -1,0 +1,154 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\sanas\\OneDrive\\Desktop\\FlaredUpHack\\backend\\contracts\\FTSOConsumer.sol": {
+      "lastModificationDate": 1765070075447,
+      "contentHash": "6e47b4ba90d3bf2de08aa92eba51941f",
+      "sourceName": "contracts/FTSOConsumer.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "FTSOConsumer",
+        "IPriceProvider"
+      ]
+    },
+    "C:\\Users\\sanas\\OneDrive\\Desktop\\FlaredUpHack\\backend\\contracts\\HedgingManager.sol": {
+      "lastModificationDate": 1765070075387,
+      "contentHash": "c6646f50489d7fd5ee823490cd9200d1",
+      "sourceName": "contracts/HedgingManager.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "HedgingManager",
+        "IDex",
+        "IFTSO"
+      ]
+    },
+    "C:\\Users\\sanas\\OneDrive\\Desktop\\FlaredUpHack\\backend\\contracts\\SmartAccount.sol": {
+      "lastModificationDate": 1765072227665,
+      "contentHash": "f7f210df44b4c13499a1689f8f19fdd6",
+      "sourceName": "contracts/SmartAccount.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC20",
+        "IHedgingManager",
+        "SmartAccount"
+      ]
+    },
+    "C:\\Users\\sanas\\OneDrive\\Desktop\\FlaredUpHack\\backend\\contracts\\TestToken.sol": {
+      "lastModificationDate": 1765076583154,
+      "contentHash": "2409d2015e690adab742c09d62091d57",
+      "sourceName": "contracts/TestToken.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "TestToken"
+      ]
+    }
+  }
+}

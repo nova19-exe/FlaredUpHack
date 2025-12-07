@@ -51,7 +51,7 @@ contract HedgingManager {
     /// Hedge BTC losses with XRP
     function executeHedge(address fromToken, address toToken, uint256 percent) external {
         uint256 btcPrice = ftso.getCurrentPrice("BTC");
-        uint256 xrpPrice = ftso.getCurrentPrice("XRP");
+        //uint256 xrpPrice = ftso.getCurrentPrice("XRP");
 
         // Example: if BTC drops >10%, hedge
         if (btcPrice < (btcPrice * 90) / 100) {

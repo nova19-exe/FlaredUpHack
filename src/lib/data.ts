@@ -7,14 +7,14 @@ export type Asset = {
 };
 
 export const assets: Asset[] = [
-  { id: "bitcoin", name: "Bitcoin", ticker: "BTC", price: 0, change24h: 0 },
-  { id: "ethereum", name: "Ethereum", ticker: "ETH", price: 0, change24h: 0 },
-  { id: "solana", name: "Solana", ticker: "SOL", price: 0, change24h: 0 },
-  { id: "tether", name: "Tether", ticker: "USDT", price: 0, change24h: 0 },
-  { id: "usd-coin", name: "USD Coin", ticker: "USDC", price: 0, change24h: 0 },
-  { id: "dai", name: "Dai", ticker: "DAI", price: 0, change24h: 0 },
-  { id: "ripple", name: "XRP", ticker: "XRP", price: 0, change24h: 0 },
-  { id: "flare-network", name: "Flare", ticker: "FLR", price: 0, change24h: 0 },
+  { id: "bitcoin", name: "Bitcoin", ticker: "BTC", price: 68000, change24h: 1.2 },
+  { id: "ethereum", name: "Ethereum", ticker: "ETH", price: 3500, change24h: -0.8 },
+  { id: "solana", name: "Solana", ticker: "SOL", price: 150, change24h: 2.4 },
+  { id: "tether", name: "Tether", ticker: "USDT", price: 1, change24h: 0 },
+  { id: "usd-coin", name: "USD Coin", ticker: "USDC", price: 1, change24h: 0 },
+  { id: "dai", name: "Dai", ticker: "DAI", price: 1, change24h: 0 },
+  { id: "ripple", name: "XRP", ticker: "XRP", price: 0.52, change24h: 1.1 },
+  { id: "flare-network", name: "Flare", ticker: "FLR", price: 0.025, change24h: 3.2 },
 ];
 
 
