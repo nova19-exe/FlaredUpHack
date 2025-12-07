@@ -224,5 +224,9 @@ This project is proudly built by the **Infibytes** team:
 
 🤝 Together, we collaborated across **blockchain, frontend, system design, and deployment** to bring FlareTrade to life for **FlaredUpHack**.
 
+<<<<<<< HEAD
 
 <img src="./screenshot/1.jpg" width="200" />
+=======
+    
+>>>>>>> f608cf4f8ce4d83d3773a31b42e53a94257b004e
