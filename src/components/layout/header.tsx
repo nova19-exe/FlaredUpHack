@@ -1,31 +1,39 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
-import { BarChart, Bot, History, Settings, Wallet, LogOut, Copy, Check, Home, CandlestickChart, User, Bell } from "lucide-react";
+import {
+  BarChart,
+  Bot,
+  History,
+  Settings,
+  Wallet,
+  LogOut,
+  Home,
+  CandlestickChart,
+  User,
+  Bell,
+  Menu,
+} from "lucide-react";
 import { Logo } from "@/components/icons/logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
-import { useAccount, useConnect, useDisconnect, useBalance, useChainId } from 'wagmi';
+
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  useConnect,
+  useDisconnect,
+  useBalance,
+  useChainId,
+  useAccount,
+} from "wagmi";
+
 import { flare } from "viem/chains";
 import { useState } from "react";
 import { Badge } from "../ui/badge";
 import { notifications } from "@/lib/data";
+
+/* -------------------------------- LINKS -------------------------------- */
 
 const links = [
   { href: "/", label: "Home", icon: Home },
@@ -37,27 +45,39 @@ const links = [
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
+/* -------------------------------- NAV LINKS -------------------------------- */
+
 function NavLinks({ isMobile = false }: { isMobile?: boolean }) {
-    const pathname = usePathname();
-    const Comp = isMobile ? 'div' : 'nav';
-    return (
-        <Comp className={cn("items-center text-sm font-medium", isMobile ? "flex flex-col gap-4 mt-6" : "hidden md:flex md:gap-8")}>
-            {links.map((link) => (
-                <Link
-                    key={link.href}
-                    href={link.href}
-                    className={cn(
-                        "transition-colors hover:text-primary",
-                        pathname === link.href ? "text-primary font-semibold" : "text-muted-foreground",
-                        isMobile && "text-lg"
-                    )}
-                >
-                    {link.label}
-                </Link>
-            ))}
-        </Comp>
-    )
+  const pathname = usePathname();
+  const Comp = isMobile ? "div" : "nav";
+
+  return (
+    <Comp
+      className={cn(
+        "items-center text-sm font-medium",
+        isMobile ? "flex flex-col gap-4 mt-6" : "hidden md:flex md:gap-8"
+      )}
+    >
+      {links.map((link) => (
+        <Link
+          key={link.href}
+          href={link.href}
+          className={cn(
+            "transition-colors hover:text-primary",
+            pathname === link.href
+              ? "text-primary font-semibold"
+              : "text-muted-foreground",
+            isMobile && "text-lg"
+          )}
+        >
+          {link.label}
+        </Link>
+      ))}
+    </Comp>
+  );
 }
+
+/* -------------------------------- WALLET BUTTON -------------------------------- */
 
 function ConnectWalletButton() {
   const { connectors, connect } = useConnect();
@@ -65,161 +85,125 @@ function ConnectWalletButton() {
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
   const chainId = useChainId();
-  const [copied, setCopied] = useState(false);
 
-  const shortAddress = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '';
-  const isFlareNetwork = chainId === flare.id;
+  const shortAddress = address
+    ? `${address.slice(0, 6)}...${address.slice(-4)}`
+    : "";
 
-  const handleCopy = () => {
-    if (address) {
-      navigator.clipboard.writeText(address);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
+  const isFlare = chainId === flare.id;
 
   if (isConnected) {
     return (
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline">
-            <Wallet className="mr-2 h-4 w-4" />
-            {shortAddress}
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Wallet Connected</DialogTitle>
-            <DialogDescription>
-              View your wallet details and network status.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between rounded-lg border p-3">
-              <span className="text-sm text-muted-foreground">Address</span>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-sm">{shortAddress}</span>
-                <Button variant="ghost" size="icon" onClick={handleCopy} className="h-7 w-7">
-                  {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
-                </Button>
-              </div>
-            </div>
-             <div className="flex items-center justify-between rounded-lg border p-3">
-                <span className="text-sm text-muted-foreground">Balance</span>
-                <span className="font-mono text-sm">{balance ? `${Number(balance.formatted).toFixed(4)} ${balance.symbol}` : 'Loading...'}</span>
-            </div>
-            <div className="flex items-center justify-between rounded-lg border p-3">
-              <span className="text-sm text-muted-foreground">Network</span>
-              <Badge variant={isFlareNetwork ? "success" : "destructive"}>
-                {isFlareNetwork ? "Flare Connected" : `Wrong Network (Switch to ${flare.name})`}
-              </Badge>
-            </div>
-          </div>
-          <DialogClose asChild>
-            <Button onClick={() => disconnect()} variant="destructive" className="w-full mt-4">
-              <LogOut className="mr-2 h-4 w-4" />
-              Disconnect
-            </Button>
-          </DialogClose>
-        </DialogContent>
-      </Dialog>
+      <div className="flex items-center gap-3">
+        <Badge variant={isFlare ? "success" : "destructive"}>
+          {isFlare ? "Flare" : "Wrong Network"}
+        </Badge>
+
+        <Button variant="outline">
+          💰 {balance ? Number(balance.formatted).toFixed(4) : "0"}{" "}
+          {balance?.symbol}
+        </Button>
+
+        <Button variant="outline">{shortAddress}</Button>
+
+        <Button variant="destructive" onClick={() => disconnect()}>
+          <LogOut className="h-4 w-4" />
+        </Button>
+      </div>
     );
   }
 
-  const walletConnectors = connectors.filter(c => c.icon);
-
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>
-          <Wallet className="mr-2 h-4 w-4" />
-          Connect Wallet
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Connect Wallet</DialogTitle>
-          <DialogDescription>
-            Choose your preferred wallet to connect to FlareTrade.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4">
-          {walletConnectors.map((connector) => (
-             <DialogClose asChild key={connector.id}>
-              <Button onClick={() => connect({ connector })} variant="outline" className="w-full justify-start text-base py-6">
-                <img src={connector.icon} alt={connector.name} className="h-6 w-6 mr-4" />
-                {connector.name}
-              </Button>
-            </DialogClose>
-          ))}
-        </div>
-      </DialogContent>
-    </Dialog>
+    <Button onClick={() => connect({ connector: connectors[0] })}>
+      <Wallet className="mr-2 h-4 w-4" />
+      Connect Wallet
+    </Button>
   );
 }
+
+/* -------------------------------- NOTIFICATIONS -------------------------------- */
 
 function Notifications() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Bell className="h-5 w-5" />
-          <span className="sr-only">Open notifications</span>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-80" align="end">
-        <div className="p-4">
-          <h4 className="font-medium text-lg">Notifications</h4>
-          <p className="text-sm text-muted-foreground">You have {notifications.length} new notifications.</p>
-        </div>
-        <div className="space-y-2 p-4 pt-0 border-t">
-          {notifications.map((notification) => (
-            <div key={notification.id} className="flex items-start gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
-                {notification.type === 'success' ? '✅' : notification.type === 'error' ? '❌' : '🔔'}
+    <div className="relative">
+      <Button variant="outline" size="icon" onClick={() => setOpen(!open)}>
+        <Bell className="h-5 w-5" />
+      </Button>
+
+      {open && (
+        <div className="absolute right-0 mt-2 w-80 rounded-lg border bg-background shadow-lg">
+          <div className="p-4">
+            <h4 className="font-medium text-lg">Notifications</h4>
+            <p className="text-sm text-muted-foreground">
+              You have {notifications.length} new notifications.
+            </p>
+          </div>
+
+          <div className="space-y-2 p-4 pt-0 border-t">
+            {notifications.map((notification) => (
+              <div key={notification.id} className="flex items-start gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
+                  {notification.type === "success"
+                    ? "✅"
+                    : notification.type === "error"
+                    ? "❌"
+                    : "🔔"}
+                </div>
+                <div>
+                  <p className="font-semibold text-sm">
+                    {notification.title}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {notification.description}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-sm">{notification.title}</p>
-                <p className="text-xs text-muted-foreground">{notification.description}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </PopoverContent>
-    </Popover>
+      )}
+    </div>
   );
 }
 
+/* -------------------------------- HEADER -------------------------------- */
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center border-b border-white/10 bg-background/80 px-4 backdrop-blur-sm md:px-6">
+    <header className="sticky top-0 z-10 flex h-16 items-center border-b border-white/10 bg-background/80 px-4 backdrop-blur-sm md:px-6">
       <div className="flex items-center gap-2 mr-auto">
         <Logo />
         <h1 className="text-xl font-headline font-bold">FlareTrade</h1>
       </div>
-      <div className="absolute left-1/2 -translate-x-1/2">
-        <NavLinks />
-      </div>
-      <div className="ml-auto flex items-center gap-2">
+
+      <div className="hidden lg:flex flex-1 justify-center">
+  <NavLinks />
+</div>
+
+
+<div className="ml-auto flex items-center gap-2 shrink-0">
+
         <Notifications />
         <ConnectWalletButton />
+
         <Sheet>
-            <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="md:hidden">
-                    <Menu className="h-5 w-5" />
-                    <span className="sr-only">Toggle navigation menu</span>
-                </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-                <div className="flex flex-col items-center">
-                    <div className="flex items-center gap-2 mt-4">
-                        <Logo />
-                        <h1 className="text-xl font-semibold">FlareTrade</h1>
-                    </div>
-                    <NavLinks isMobile={true} />
-                </div>
-            </SheetContent>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon" className="md:hidden">
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+
+          <SheetContent side="right">
+            <div className="flex flex-col items-center">
+              <div className="flex items-center gap-2 mt-4">
+                <Logo />
+                <h1 className="text-xl font-semibold">FlareTrade</h1>
+              </div>
+              <NavLinks isMobile />
+            </div>
+          </SheetContent>
         </Sheet>
       </div>
     </header>
