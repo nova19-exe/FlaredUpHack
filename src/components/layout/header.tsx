@@ -29,7 +29,8 @@ import {
 } from "wagmi";
 
 import { flare } from "viem/chains";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 import { notifications } from "@/lib/data";
 
@@ -77,7 +78,7 @@ function NavLinks({ isMobile = false }: { isMobile?: boolean }) {
   );
 }
 
-/* -------------------------------- WALLET BUTTON -------------------------------- */
+/* -------------------------------- ✅ WALLET BUTTON (HYDRATION FIXED) -------------------------------- */
 
 function ConnectWalletButton() {
   const { connectors, connect } = useConnect();
@@ -85,12 +86,27 @@ function ConnectWalletButton() {
   const { disconnect } = useDisconnect();
   const { data: balance } = useBalance({ address });
   const chainId = useChainId();
+  const router = useRouter();
+
+  // ✅ HYDRATION FIX
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const shortAddress = address
     ? `${address.slice(0, 6)}...${address.slice(-4)}`
     : "";
 
   const isFlare = chainId === flare.id;
+
+  const handleDisconnect = () => {
+    disconnect();
+    router.push("/");
+  };
 
   if (isConnected) {
     return (
@@ -100,13 +116,13 @@ function ConnectWalletButton() {
         </Badge>
 
         <Button variant="outline">
-          💰 {balance ? Number(balance.formatted).toFixed(4) : "0"}{" "}
+          💰 {balance ? (Number(balance.value) / Math.pow(10, balance.decimals)).toFixed(4) : "0"}{" "}
           {balance?.symbol}
         </Button>
 
         <Button variant="outline">{shortAddress}</Button>
 
-        <Button variant="destructive" onClick={() => disconnect()}>
+        <Button variant="destructive" onClick={handleDisconnect}>
           <LogOut className="h-4 w-4" />
         </Button>
       </div>
@@ -179,12 +195,10 @@ export function Header() {
       </div>
 
       <div className="hidden lg:flex flex-1 justify-center">
-  <NavLinks />
-</div>
+        <NavLinks />
+      </div>
 
-
-<div className="ml-auto flex items-center gap-2 shrink-0">
-
+      <div className="ml-auto flex items-center gap-2 shrink-0">
         <Notifications />
         <ConnectWalletButton />
 
