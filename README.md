@@ -1,64 +1,226 @@
-# Flare Hedge
+# 🚀 FlareTrade – Decentralized Collateral & Settlement Trading Platform
 
-Flare Hedge is a web application inspired by trading terminals like MetaTrader5, designed to help users manage and hedge their Bitcoin (BTC) exposure using the Flare Network's powerful features.
+FlareTrade is a **next-generation decentralized trading and settlement platform** built on smart contracts. It allows users to securely lock collateral, open positions, and settle trades **trustlessly** using blockchain infrastructure — with real-time market visualization and Web3 wallet integration.
 
-The application provides live price feeds, on-chain order execution via Flare Smart Accounts, and a sophisticated automated hedging tool powered by AI.
+---
 
-## Key Features
+## 🎯 Project Vision
 
-- **Live Price Feeds**: Real-time prices for BTC, USDT, USDC, DAI, and XRP from the Flare Time Series Oracle (FTSO).
-- **On-Chain Trading**: Place buy/sell orders that are executed as spot swaps on-chain using Flare Smart Accounts.
-- **Automated Hedging**: Configure rules to automatically hedge your BTC position against downside risk.
-- **AI-Powered Analysis**: An AI tool analyzes your hedging parameters and proposes or executes swaps to protect your portfolio.
-- **History & Analytics**: Track your past hedge executions and monitor your portfolio's performance.
+To build a **fully trustless, transparent, and automated trading & settlement system** where:
+- Users control their own funds
+- Trades are settled on-chain
+- No intermediary can manipulate balances
+- All actions are verifiable on the blockchain
 
-## How Hedging Works
+---
 
-The core concept is to protect your Bitcoin holdings from significant price drops.
+## 📌 Key Features
 
-1.  **You hold BTC** (or wrapped BTC on the Flare network).
-2.  **You set a rule**: For example, "If my BTC position loses more than 10% of its value, I want to hedge 30% of it."
-3.  **The system monitors**: Using reliable price data from FTSO, the app continuously checks your position's value against your rules.
-4.  **Action is taken**: When a trigger condition is met, the system automatically builds a transaction to swap a portion of your BTC into more stable assets like USDT, USDC, or DAI. This is executed atomically on-chain using a Flare Smart Account.
+✅ Trustless collateral locking  
+✅ On-chain trade settlement  
+✅ MetaMask wallet integration  
+✅ Live BTC, ETH & SOL price charts  
+✅ Built on Flare / EVM-compatible network  
+✅ Fully decentralized execution  
 
-Users can configure:
-- **Trigger Condition**: The percentage drop that activates the hedge.
-- **Hedge Size**: The amount of BTC to convert.
-- **Target Assets**: Your choice of stablecoins to hedge into.
-- **Execution Mode**: Choose between fully automated execution or manual confirmation for each hedge.
+---
 
-### A Note on XRP
+## 🧠 System Architecture
 
-XRP can be selected as a hedge asset. However, it is important to note that **XRP is not a stablecoin**. It is a volatile cryptocurrency, and using it as a hedge asset introduces different risk dynamics compared to stablecoins like USDT, USDC, and DAI.
+User Interface (Next.js)
+↓
+MetaMask Wallet
+↓
+Ethers.js
+↓
+Smart Contracts (Flare / EVM)
+↓
+On-chain Collateral & Settlement
 
-## Getting Started
+---
 
-This is a Next.js application built with the App Router.
+📊 Live Market Data → TradingView API → Frontend Charts
 
-### Prerequisites
+---
 
-- Node.js (v18 or later)
-- npm or yarn
+## 🔩 Core Components Explained
 
-### Environment Variables
+---
 
-Before running the application, you need to set up your environment variables. Create a `.env.local` file in the root of the project and add your Genkit/Google AI credentials.
+### 1️⃣ Smart Contracts (Solidity)
 
-```
-GOOGLE_API_KEY=your_google_ai_api_key
-```
+The **heart of the entire platform** – responsible for all financial logic.
 
-### Running the Development Server
+**Responsibilities:**
+- Locking and releasing collateral  
+- Managing user positions  
+- Executing settlements  
+- Secure withdrawals  
+- Access control  
 
-1.  Install dependencies:
-    ```bash
-    npm install
-    ```
-2.  Run the development server:
-    ```bash
-    npm run dev
-    ```
+**Core Contracts:**
+- `FlareTrade.sol` – Main collateral & settlement logic  
+- `Token.sol` – ERC20 test token  
 
-Open [http://localhost:9002](http://localhost:9002) with your browser to see the result.
+**Tech Used:**
+- Solidity ^0.8.x  
+- Hardhat  
+- Ethers.js  
 
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+---
+
+### 2️⃣ Wallet Integration (MetaMask)
+
+MetaMask acts as the **user authentication and transaction signer**.
+
+**Functions:**
+- Wallet connection  
+- Network detection  
+- Transaction signing  
+- Collateral deposits  
+- Secure withdrawals  
+
+---
+
+### 3️⃣ Frontend (Next.js + React)
+
+The **complete user interaction layer**.
+
+**Features:**
+- Wallet connection interface  
+- Live crypto charts  
+- Collateral deposit & withdrawal UI  
+- Open & close position dashboard  
+- Transaction status updates  
+
+**Tech Stack:**
+- Next.js  
+- React  
+- TypeScript  
+- Ethers.js  
+- Tailwind CSS  
+
+---
+
+### 4️⃣ Live Market Data (TradingView API)
+
+Used **only for visualization & decision making**.
+
+- BTC  
+- ETH  
+- SOL  
+- Real-time candle charts  
+
+⚠️ **Settlement logic does NOT depend on these prices.**
+
+---
+
+### 5️⃣ Blockchain Network (Flare / EVM)
+
+Your platform is deployed on an **EVM-compatible chain** which enables:
+- Low gas fees  
+- Fast confirmation  
+- Seamless Solidity deployment  
+- Oracle-friendly environment  
+
+---
+
+### 6️⃣ Backend (Optional / Future Expansion)
+
+Currently the platform is **Frontend + Blockchain**, but future backend may include:
+- Trade history indexing  
+- Risk engine  
+- Notifications  
+- Analytics  
+- Leaderboards  
+
+---
+
+## 📂 Project Structure
+/contracts
+└─ FlareTrade.sol
+└─ Token.sol
+
+/src
+/app
+/components
+/lib
+└─ contract.ts
+└─ abi/
+
+hardhat.config.ts
+.env
+README.md
+
+---
+
+## 🔐 Security Model
+
+- ✅ No centralized custody  
+- ✅ Users control private keys  
+- ✅ All fund movement is on-chain  
+- ✅ No backend can manipulate assets  
+- ✅ Every transaction is verifiable  
+
+---
+
+## 🔄 Smart Contract Workflow
+
+1. User connects wallet  
+2. Deposits collateral  
+3. Position is stored on-chain  
+4. Trade logic executes  
+5. Settlement is triggered  
+6. User withdraws funds  
+
+---
+
+## ❓ Why Smart Contracts Are Required
+
+✅ Trustless financial logic  
+✅ Automated settlements  
+✅ Transparent balance tracking  
+✅ No third-party risk  
+✅ Fully decentralized execution  
+
+---
+
+## 🛠 Tech Stack
+
+- Solidity  
+- Hardhat  
+- Ethers.js  
+- Next.js  
+- TypeScript  
+- MetaMask  
+- TradingView API  
+
+---
+
+## 🏆 Hackathon Project
+
+This project was built as part of **FlaredUpHack** with the goal of demonstrating:
+- Decentralized finance infrastructure  
+- Secure collateral management  
+- On-chain settlements  
+- Web3 user interaction  
+
+---
+
+## ✅ One-Line Summary
+
+**FlareTrade is a decentralized collateral and settlement engine where smart contracts securely manage funds and execute trades without intermediaries.**
+
+---
+
+## 👥 Team – Infibytes
+
+This project is proudly built by the **Infibytes** team:
+
+**Harsh Abhinav** – https://github.com/harshabhinav  
+**Mayank Bhatt** – https://github.com/Mayank-Bhatt-014
+**Fayzan Mohammed** – https://github.com/nova19-exe  
+**Mohammed Aman** – https://github.com/MohammedAman123
+
+🤝 Together, we collaborated across **blockchain, frontend, system design, and deployment** to bring FlareTrade to life for **FlaredUpHack**.
+
